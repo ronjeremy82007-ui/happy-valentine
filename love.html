@@ -1,0 +1,337 @@
+<!doctype html>
+<html>
+  <head>
+    <meta http-equiv="refresh" content="0;url=love.html">
+    <link rel="canonical" href="love.html">
+  </head>
+  <body>
+    Redirecting to <a href="love.html">love.html</a>…
+  </body>
+</html><!DOCTYPE html>
+<html lang="en"></html>
+<head>
+  <title>Valentine's Day</title>
+</head>
+<body>
+  <div class="background-heart">❤️</div>
+  <p>
+    Will you be my valentine??
+  </p>
+  <div class="btnn">
+    <button class="yes-button">YES</button>
+    <button class="no-button">NO</button>
+  </div>
+  
+  <style>
+    body {
+      background: pink;
+      overflow: hidden;
+    }
+    
+    .background-heart {
+      position: fixed;
+      font-size: 500px;
+      top: -15%;
+      left: 27%;
+      opacity: 0.3;
+      z-index: -1;
+    }
+    
+    .floating-heart {
+      position: fixed;
+      color: red;
+      font-size: 30px;
+      animation: rise 4s infinite;
+      z-index: -1;
+    }
+    
+    @keyframes rise {
+      0% {
+        bottom: -50px;
+        opacity: 1;
+      }
+      100% {
+        bottom: 100vh;
+        opacity: 0;
+      }
+    }
+    .yes-button {
+      background-color: rgb(165, 0, 0);
+      border: none;
+      border-radius: 16px;
+      padding: 10px 30px;
+      color: white;
+      cursor: pointer;
+      transition: all 0.15s;
+      font-size: x-large;
+    }
+    .yes-button:hover {
+      background-color: rgb(255, 0, 0);
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+    }
+    .yes-button:active {
+      background-color: rgb(139, 0, 0);
+
+    }
+    .no-button {
+       background-color: rgb(165, 0, 0);
+      border: none;
+      border-radius: 16px;
+      padding: 10px 30px;
+      color: white;
+      cursor: pointer;
+      transition: all 0.15s;
+      font-size: x-large;
+    }
+    .no-button:hover {
+      background-color: rgb(255, 0, 0);
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15) ;
+    }
+    .no-button:active {
+      background-color: rgb(139, 0, 0);
+    }
+    .btnn {
+      display: flex;
+      justify-content: center; 
+      align-items: center;     
+      gap: 0.75rem;            
+      padding: 1rem;
+    }
+    p {
+      text-align: center;
+      margin-top: 100px;
+      font-size: 70px;
+      font-family: cursive;
+      font-feature-settings: "aalt";
+    }
+
+    /* GIF styles */
+    .floating-gif {
+      position: fixed;
+      z-index: 10;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      transition: transform 3s ease, opacity 3s ease;
+      opacity: 1;
+      will-change: transform, opacity;
+    }
+
+    @keyframes gifFloat {
+      0% { transform: translate(-50%, -50%) translateY(0) scale(1); opacity: 1; }
+      100% { transform: translate(-50%, -50%) translateY(-120px) scale(0.9); opacity: 0; }
+    }
+
+    /* Heart-fill overlay used for YES transition */
+    .heart-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      pointer-events: none;
+      overflow: hidden;
+      background: transparent;
+      display: block;
+      opacity: 1;
+      transition: opacity 400ms ease;
+    }
+
+    /* When set, overlay briefly becomes solid before revealing the page */
+    .heart-overlay.full {
+      background: rgba(255,255,255,1);
+      transition: background 300ms ease, opacity 400ms ease;
+    }
+
+    .heart-overlay .fill-heart {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%) scale(0.2);
+      opacity: 0;
+      font-size: 28px;
+      will-change: transform, opacity;
+      animation-name: heartPop;
+      animation-fill-mode: forwards;
+    }
+
+    @keyframes heartPop {
+      0% { opacity: 0; transform: translate(-50%, -50%) scale(0.2); }
+      60% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+      100% { opacity: 1; transform: translate(-50%, -50%) scale(12); }
+    }
+
+    /* In-page frame used to show the love-letter page without leaving current tab */
+    .inpage-frame {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      z-index: 9999;
+      opacity: 0;
+      transition: opacity 500ms ease;
+      pointer-events: auto;
+      background: white;
+    }
+
+    /* Small music toggle shown after YES is clicked */
+    .music-toggle {
+      position: fixed;
+      right: 16px;
+      top: 16px;
+      z-index: 10001;
+      background: rgba(0,0,0,0.5);
+      color: #fff;
+      border-radius: 20px;
+      padding: 6px 10px;
+      font-size: 14px;
+      cursor: pointer;
+      pointer-events: auto;
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .music-toggle button {
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 14px;
+      cursor: pointer;
+      padding: 0;
+    }
+  </style>
+
+  <script>
+
+    setInterval(() => {
+      const heart = document.createElement('div');
+      heart.className = 'floating-heart';
+      heart.textContent = '❤️';
+      heart.style.left = Math.random() * 100 + '%';
+      document.body.appendChild(heart);
+      
+      setTimeout(() => heart.remove(), 4000);
+    }, 300);
+
+
+
+    // Run love letter transition when YES button is clicked
+    document.querySelector('.yes-button').addEventListener('click', () => {
+      playHeartsThenShowPage('love%20letter%202.html');
+    });
+
+    function playHeartsThenShowPage(url) {
+      // Create overlay and many hearts that expand to fill the screen
+      const overlay = document.createElement('div');
+      overlay.className = 'heart-overlay';
+      document.body.appendChild(overlay);
+
+      // Create or reuse background audio and play it
+      let audio = document.getElementById('bg-music');
+      if (!audio) {
+        audio = document.createElement('audio');
+        audio.id = 'bg-music';
+        audio.loop = true;
+        audio.preload = 'auto';
+        audio.style.display = 'none';
+        // Default fallback source — replace with your file if you have one in the folder
+        const source = document.createElement('source');
+        source.src = 'music.mp3';
+        source.type = 'audio/mpeg';
+        audio.appendChild(source);
+        document.body.appendChild(audio);
+      }
+
+      // try to play (click is a user gesture so should succeed in most browsers)
+      audio.volume = 0.6;
+      const playPromise = audio.play();
+      if (playPromise && playPromise.catch) {
+        playPromise.catch((err) => {
+          console.warn('Autoplay prevented or playback error:', err);
+        });
+      }
+
+      // small music toggle UI so user can mute/unmute
+      let toggle = document.querySelector('.music-toggle');
+      if (!toggle) {
+        toggle = document.createElement('div');
+        toggle.className = 'music-toggle';
+        toggle.innerHTML = `<span class="label">Music</span><button class="mute-btn">🔊</button>`;
+        document.body.appendChild(toggle);
+
+        const btn = toggle.querySelector('.mute-btn');
+        btn.addEventListener('click', () => {
+          if (audio.muted) {
+            audio.muted = false;
+            btn.textContent = '🔊';
+          } else {
+            audio.muted = true;
+            btn.textContent = '🔈';
+          }
+        });
+      }
+
+      const count = 40; // number of hearts
+      for (let i = 0; i < count; i++) {
+        const h = document.createElement('div');
+        h.className = 'fill-heart';
+        h.textContent = '❤️';
+        // random position across viewport
+        h.style.left = (Math.random() * 100) + '%';
+        h.style.top = (Math.random() * 100) + '%';
+        // randomize delay and duration for organic effect
+        const delay = (Math.random() * 0.6).toFixed(3);
+        const dur = (0.9 + Math.random() * 0.6).toFixed(3);
+        h.style.animationDelay = delay + 's';
+        h.style.animationDuration = dur + 's';
+        overlay.appendChild(h);
+      }
+
+      // ensure animations start
+      requestAnimationFrame(() => overlay.classList.add('active'));
+
+      const waitBeforeFull = 900; // ms until add 'full' background
+      const createFrameAt = 1100; // ms until create iframe
+      const fadeDuration = 500; // ms for fade transitions
+
+      // briefly fill background with white to create a nice transition
+      setTimeout(() => overlay.classList.add('full'), waitBeforeFull);
+
+      // create the in-page frame and fade it in while fading overlay out
+      setTimeout(() => {
+        const iframe = document.createElement('iframe');
+        iframe.className = 'inpage-frame';
+        iframe.src = url;
+        document.body.appendChild(iframe);
+
+        // Wait a frame so browser registers new element then fade
+        requestAnimationFrame(() => {
+          iframe.style.opacity = '1';
+          overlay.style.opacity = '0';
+        });
+
+        // remove overlay after fade completes
+        setTimeout(() => { try { overlay.remove(); } catch (e) {} }, fadeDuration + 100);
+      }, createFrameAt);
+    }
+
+    // Show multiple GIFs when NO button is clicked
+    document.querySelector('.no-button').addEventListener('click', () => {
+      const gifName = 'giphy.gif'; // replace with your file name
+      const count = 5; // number of gifs to show (change as needed, >2)
+      for (let i = 0; i < count; i++) {
+        const img = document.createElement('img');
+        img.src = gifName;
+        img.className = 'floating-gif';
+        img.style.left = Math.random() * 90 + '%';
+        img.style.top = (40 + Math.random() * 40) + '%';
+        img.style.width = (60 + Math.random() * 140) + 'px';
+        img.style.transform += ' rotate(' + (Math.random() * 360) + 'deg)';
+        img.style.animation = 'gifFloat 4s forwards';
+        document.body.appendChild(img);
+        // remove after animation completes
+        setTimeout(() => img.remove(), 4200 + Math.random() * 2000);
+      }
+    });
+  </script>
+</body>
+</html>
